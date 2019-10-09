@@ -97,8 +97,6 @@ while running:
     update_canvas()
     frame = (frame + 1) % 8
 
-
-
 close_canvas()
 
 
