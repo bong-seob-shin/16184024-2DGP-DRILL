@@ -20,8 +20,8 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
         elif event.type == SDL_MOUSEBUTTONDOWN:
-            x2 = hx
-            y2 = hy
+            x2 = hx-50
+            y2 = hy+50
             check_mouseClick = True
     pass
 
@@ -65,7 +65,11 @@ while running:
             b = (1 - t) * y + t * y2
             x = a
             y = b
+            clear_canvas()
+            kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
             character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+            hand_arrow.clip_draw(0, 0, 100, 100, hx, hy)
+            update_canvas()
         check_mouseClick = False
 
     update_canvas()
