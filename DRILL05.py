@@ -12,6 +12,7 @@ def handle_events():
     global x, y
     global check_mouseClick
     global check_right
+    global new_click
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -23,6 +24,7 @@ def handle_events():
         elif event.type == SDL_MOUSEBUTTONDOWN:
             x2 = hx-50
             y2 = hy+50
+            new_click = False
             check_mouseClick = True
             if hx < x :
                 check_right = False
@@ -55,23 +57,16 @@ x2, y2 = KPU_WIDTH // 2, KPU_HEIGHT//2
 hx, hy = KPU_WIDTH//2, KPU_HEIGHT//2
 check_mouseClick = False
 check_right = True
+new_Click = True
 move_point = [(x, y), (hx, hy)]
 frame = 0
 hide_cursor()
 
 while running:
 
-    handle_events()
-
-    clear_canvas()
-    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    if check_right:
-        character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
-    else:
-        character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
-    hand_arrow.clip_draw(0, 0, 100, 100, hx, hy)
     if check_mouseClick:
-        for i in range(0, 100 + 1, 2):
+        for i in range(0, 100, 1):
+            handle_events()
             t = i / 100
             a = (1 - t) * x + t * x2
             b = (1 - t) * y + t * y2
@@ -85,8 +80,19 @@ while running:
                 character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
             hand_arrow.clip_draw(0, 0, 100, 100, hx, hy)
             update_canvas()
+            frame = (frame + 1) % 8
 
         check_mouseClick = False
+
+    handle_events()
+
+    clear_canvas()
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+    if check_right:
+        character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    else:
+        character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+    hand_arrow.clip_draw(0, 0, 100, 100, hx, hy)
 
     update_canvas()
     frame = (frame + 1) % 8
