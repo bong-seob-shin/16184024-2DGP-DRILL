@@ -63,50 +63,141 @@ open_canvas(KPU_WIDTH, KPU_HEIGHT)
 
 kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
-hand_arrow = load_image('hand_arrow.png')
-
 
 running = True
 x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
 x2, y2 = KPU_WIDTH // 2, KPU_HEIGHT//2
 size = 10
-random_numbers_x = [random.randint(-500, 500) for n in range(size)]
-random_numbers_y = [random.randint(-500, 500) for n in range(size)]
+random_numbers_x = [random.randint(0, 100) for n in range(size)]
+random_numbers_y = [random.randint(0, 100) for n in range(size)]
 frame = 0
 hide_cursor()
 
 while running:
 
+
     # draw p1-p2
     for i in range(0, 50, 2):
         t = i / 100
-        x = (2 * t ** 2 - 3 * t + 1) * p1[0] + (-4 * t ** 2 + 4 * t) * p2[0] + (2 * t ** 2 - t) * p3[0]
-        y = (2 * t ** 2 - 3 * t + 1) * p1[1] + (-4 * t ** 2 + 4 * t) * p2[1] + (2 * t ** 2 - t) * p3[1]
-
+        x = (2 * t ** 2 - 3 * t + 1) * random_numbers_x[0] + (-4 * t ** 2 + 4 * t) * random_numbers_x[1] + (2 * t ** 2 - t) * random_numbers_x[2]
+        y = (2 * t ** 2 - 3 * t + 1) * random_numbers_y[0] + (-4 * t ** 2 + 4 * t) * random_numbers_y[1] + (2 * t ** 2 - t) * random_numbers_y[2]
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        #if random_numbers_x[0] > random_numbers_x[2]:
+         #   character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+        #else:
+        character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
     # draw p2-p3
     for i in range(0, 100, 2):
         t = i / 100
-        x = ((-t ** 3 + 2 * t ** 2 - t) * p1[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[0] + (
-                    -3 * t ** 3 + 4 * t ** 2 + t) * p3[0] + (t ** 3 - t ** 2) * p4[0]) / 2
-        y = ((-t ** 3 + 2 * t ** 2 - t) * p1[1] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[1] + (
-                    -3 * t ** 3 + 4 * t ** 2 + t) * p3[1] + (t ** 3 - t ** 2) * p4[1]) / 2
-
+        x = ((-t ** 3 + 2 * t ** 2 - t) * random_numbers_x[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * random_numbers_x[1] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * random_numbers_x[2] + (t ** 3 - t ** 2) * random_numbers_x[3]) / 2
+        y = ((-t ** 3 + 2 * t ** 2 - t) * random_numbers_y[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * random_numbers_y[1] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * random_numbers_y[2] + (t ** 3 - t ** 2) * random_numbers_y[3]) / 2
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        if random_numbers_x[0] > random_numbers_x[3]:
+            character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+        else:
+            character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
     # draw p3-p4
     for i in range(50, 100, 2):
         t = i / 100
-        x = (2 * t ** 2 - 3 * t + 1) * p2[0] + (-4 * t ** 2 + 4 * t) * p3[0] + (2 * t ** 2 - t) * p4[0]
-        y = (2 * t ** 2 - 3 * t + 1) * p2[1] + (-4 * t ** 2 + 4 * t) * p3[1] + (2 * t ** 2 - t) * p4[1]
+        x = (2 * t ** 2 - 3 * t + 1) * random_numbers_x[1] + (-4 * t ** 2 + 4 * t) * random_numbers_x[2] + (2 * t ** 2 - t) * random_numbers_x[3]
+        y = (2 * t ** 2 - 3 * t + 1) * random_numbers_y[1] + (-4 * t ** 2 + 4 * t) * random_numbers_y[2] + (2 * t ** 2 - t) * random_numbers_y[3]
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        if random_numbers_x[1] > random_numbers_x[3]:
+            character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+        else:
+            character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
+        for i in range(0, 50, 2):
+            t = i / 100
+            x = (2 * t ** 2 - 3 * t + 1) * random_numbers_x[3] + (-4 * t ** 2 + 4 * t) * random_numbers_x[4] + (2 * t ** 2 - t) * random_numbers_x[5]
+            y = (2 * t ** 2 - 3 * t + 1) * random_numbers_y[3] + (-4 * t ** 2 + 4 * t) * random_numbers_y[4] + (2 * t ** 2 - t) * random_numbers_y[5]
+            clear_canvas()
+            kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+            if random_numbers_x[4] > random_numbers_x[6]:
+                character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+            else:
+                character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+            update_canvas()
+            frame = (frame + 1) % 8
+        # draw p2-p3
+        for i in range(0, 100, 2):
+            t = i / 100
+            x = ((-t ** 3 + 2 * t ** 2 - t) * random_numbers_x[3] + (3 * t ** 3 - 5 * t ** 2 + 2) * random_numbers_x[4] +
+                 (-3 * t ** 3 + 4 * t ** 2 + t) * random_numbers_x[5] + (t ** 3 - t ** 2) * random_numbers_x[6]) / 2
+            y = ((-t ** 3 + 2 * t ** 2 - t) * random_numbers_y[3] + (3 * t ** 3 - 5 * t ** 2 + 2) * random_numbers_y[4]
+                 + (-3 * t ** 3 + 4 * t ** 2 + t) * random_numbers_y[5] + (t ** 3 - t ** 2) * random_numbers_y[6]) / 2
+            clear_canvas()
+            kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+            if random_numbers_x[3] > random_numbers_x[6]:
+                character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+            else:
+                character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+            update_canvas()
+            frame = (frame + 1) % 8
+        # draw p3-p4
+        for i in range(50, 100, 2):
+            t = i / 100
+            x = (2 * t ** 2 - 3 * t + 1) * random_numbers_x[4] + (-4 * t ** 2 + 4 * t) * random_numbers_x[5] + (2 * t ** 2 - t) * random_numbers_x[6]
+            y = (2 * t ** 2 - 3 * t + 1) * random_numbers_y[4] + (-4 * t ** 2 + 4 * t) * random_numbers_y[5] + (2 * t ** 2 - t) * random_numbers_y[6]
+            clear_canvas()
+            kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+            if random_numbers_x[5] > random_numbers_x[7]:
+                character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+            else:
+                character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+            update_canvas()
+            frame = (frame + 1) % 8
 
-    clear_canvas()
-    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    if check_right:
-        character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
-    else:
-        character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
-    hand_arrow.clip_draw(0, 0, 100, 100, hx, hy)
-
-    update_canvas()
-    frame = (frame + 1) % 8
+    for i in range(0, 50, 2):
+        t = i / 100
+        x = (2 * t ** 2 - 3 * t + 1) * random_numbers_x[6] + (-4 * t ** 2 + 4 * t) * random_numbers_x[7] + (2 * t ** 2 - t) * random_numbers_x[8]
+        y = (2 * t ** 2 - 3 * t + 1) * random_numbers_y[6] + (-4 * t ** 2 + 4 * t) * random_numbers_y[7] + (2 * t ** 2 - t) * random_numbers_y[8]
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        if random_numbers_x[6] > random_numbers_x[8]:
+            character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+        else:
+            character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
+    # draw p2-p3
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = ((-t ** 3 + 2 * t ** 2 - t) * random_numbers_x[6] + (3 * t ** 3 - 5 * t ** 2 + 2) * random_numbers_x[7] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * random_numbers_x[8] + (t ** 3 - t ** 2) * random_numbers_x[9]) / 2
+        y = ((-t ** 3 + 2 * t ** 2 - t) * random_numbers_y[6] + (3 * t ** 3 - 5 * t ** 2 + 2) * random_numbers_y[7] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * random_numbers_y[8] + (t ** 3 - t ** 2) * random_numbers_y[9]) / 2
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        if random_numbers_x[6] > random_numbers_x[9]:
+            character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+        else:
+            character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
+    # draw p3-p4
+    for i in range(50, 100, 2):
+        t = i / 100
+        x = (2 * t ** 2 - 3 * t + 1) * random_numbers_x[7] + (-4 * t ** 2 + 4 * t) * random_numbers_x[8] + (2 * t ** 2 - t) * random_numbers_x[9]
+        y = (2 * t ** 2 - 3 * t + 1) * random_numbers_y[7] + (-4 * t ** 2 + 4 * t) * random_numbers_y[8] + (2 * t ** 2 - t) * random_numbers_y[9]
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        if random_numbers_x[7] > random_numbers_x[9]:
+            character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+        else:
+            character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
 
 close_canvas()
 
