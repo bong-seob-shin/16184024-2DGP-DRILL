@@ -5,40 +5,29 @@ KPU_WIDTH, KPU_HEIGHT = 1280, 1024
 
 
 def draw_curve_4_points(p1, p2, p3, p4):
-    draw_big_point(p1)
-    draw_big_point(p2)
-    draw_big_point(p3)
-    draw_big_point(p4)
 
     # draw p1-p2
     for i in range(0, 50, 2):
         t = i / 100
         x = (2*t**2-3*t+1)*p1[0]+(-4*t**2+4*t)*p2[0]+(2*t**2-t)*p3[0]
         y = (2*t**2-3*t+1)*p1[1]+(-4*t**2+4*t)*p2[1]+(2*t**2-t)*p3[1]
-        draw_point((x, y))
-    draw_point(p2)
 
     # draw p2-p3
     for i in range(0, 100, 2):
         t = i / 100
         x = ((-t**3 + 2*t**2 - t)*p1[0] + (3*t**3 - 5*t**2 + 2)*p2[0] + (-3*t**3 + 4*t**2 + t)*p3[0] + (t**3 - t**2)*p4[0])/2
         y = ((-t**3 + 2*t**2 - t)*p1[1] + (3*t**3 - 5*t**2 + 2)*p2[1] + (-3*t**3 + 4*t**2 + t)*p3[1] + (t**3 - t**2)*p4[1])/2
-        draw_point((x, y))
-    draw_point(p3)
 
     # draw p3-p4
     for i in range(50, 100, 2):
         t = i / 100
         x = (2*t**2-3*t+1)*p2[0]+(-4*t**2+4*t)*p3[0]+(2*t**2-t)*p4[0]
         y = (2*t**2-3*t+1)*p2[1]+(-4*t**2+4*t)*p3[1]+(2*t**2-t)*p4[1]
-        draw_point((x, y))
-    draw_point(p4)
 
     for i in range(0, 100, 2):
         t = i / 100
         x = ((-t**3 + 2*t**2 - t)*p3[0] + (3*t**3 - 5*t**2 + 2)*p4[0] + (-3*t**3 + 4*t**2 + t)*p1[0] + (t**3 - t**2)*p2[0])/2
         y = ((-t**3 + 2*t**2 - t)*p3[1] + (3*t**3 - 5*t**2 + 2)*p4[1] + (-3*t**3 + 4*t**2 + t)*p1[1] + (t**3 - t**2)*p2[1])/2
-        draw_point((x, y))
 
 
 def handle_events():
@@ -80,14 +69,33 @@ hand_arrow = load_image('hand_arrow.png')
 running = True
 x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
 x2, y2 = KPU_WIDTH // 2, KPU_HEIGHT//2
-hx, hy = KPU_WIDTH//2, KPU_HEIGHT//2
-check_right = True
 size = 10
-random_numbers = [random.randint(-500, 500) for n in range(size)]
+random_numbers_x = [random.randint(-500, 500) for n in range(size)]
+random_numbers_y = [random.randint(-500, 500) for n in range(size)]
 frame = 0
 hide_cursor()
 
 while running:
+
+    # draw p1-p2
+    for i in range(0, 50, 2):
+        t = i / 100
+        x = (2 * t ** 2 - 3 * t + 1) * p1[0] + (-4 * t ** 2 + 4 * t) * p2[0] + (2 * t ** 2 - t) * p3[0]
+        y = (2 * t ** 2 - 3 * t + 1) * p1[1] + (-4 * t ** 2 + 4 * t) * p2[1] + (2 * t ** 2 - t) * p3[1]
+
+    # draw p2-p3
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = ((-t ** 3 + 2 * t ** 2 - t) * p1[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[0] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * p3[0] + (t ** 3 - t ** 2) * p4[0]) / 2
+        y = ((-t ** 3 + 2 * t ** 2 - t) * p1[1] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[1] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * p3[1] + (t ** 3 - t ** 2) * p4[1]) / 2
+
+    # draw p3-p4
+    for i in range(50, 100, 2):
+        t = i / 100
+        x = (2 * t ** 2 - 3 * t + 1) * p2[0] + (-4 * t ** 2 + 4 * t) * p3[0] + (2 * t ** 2 - t) * p4[0]
+        y = (2 * t ** 2 - 3 * t + 1) * p2[1] + (-4 * t ** 2 + 4 * t) * p3[1] + (2 * t ** 2 - t) * p4[1]
 
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
