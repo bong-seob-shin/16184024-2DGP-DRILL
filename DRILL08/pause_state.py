@@ -1,5 +1,6 @@
 import game_framework
 from pico2d import *
+import main_state
 
 name = "PauseState"
 image = None
@@ -7,6 +8,9 @@ image = None
 
 def enter():
     global image
+    global boy, grass
+    boy = main_state.boy
+    grass = main_state.grass
     image = load_image('pause.png')
     pass
 
@@ -30,7 +34,9 @@ def handle_events():
 
 def draw():
     clear_canvas()
-    image.draw(400, 300)
+    grass.draw()
+    boy.draw()
+    image.clip_draw(0, 0, 100, 100, 400, 300)
     update_canvas()
     pass
 
