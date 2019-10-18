@@ -7,6 +7,8 @@ image = None
 
 
 def enter():
+    global  flash
+    flash = 0
     global image
     global boy, grass
     boy = main_state.boy
@@ -32,22 +34,21 @@ def handle_events():
     pass
 
 
+def update():
+    global flash
+    flash = (flash +1) %10
+
 def draw():
+
     clear_canvas()
     grass.draw()
     boy.draw()
-    image.clip_draw(0, 0, 100, 100, 400, 300)
+    if(flash %2 == 1):
+        image.draw(400, 300, 200, 200)
     update_canvas()
     pass
 
 
-
-
-
-
-
-def update():
-    pass
 
 
 def pause():
