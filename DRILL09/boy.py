@@ -1,16 +1,18 @@
 from pico2d import *
 
 # Boy Event
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SHIFT_DOWN, SHIFT_UP, RUN_TIMER = range(8)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SHIFT_DOWN, SHIFT_UP = range(7)
 # fill here
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
-    (SDL_KEYDOWN, SDLK_LSHIFT or SDLK_RSHIFT): SHIFT_DOWN,
+    (SDL_KEYDOWN, SDLK_LSHIFT): SHIFT_DOWN,
+    (SDL_KEYDOWN, SDLK_RSHIFT): SHIFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYUP, SDLK_LSHIFT or SDLK_RSHIFT): SHIFT_UP
+    (SDL_KEYUP, SDLK_LSHIFT): SHIFT_UP,
+    (SDL_KEYUP, SDLK_RSHIFT): SHIFT_UP
 }
 
 
@@ -102,20 +104,8 @@ class DashState:
     @staticmethod
     def enter(boy, event):
 
-        if event == SHIFT_DOWN:
-            boy.velocity += 2
-        elif event == SHIFT_UP:
-            boy.velocity -= 2
-        if event == RIGHT_DOWN:
-            boy.velocity += 10
-        elif event == LEFT_DOWN:
-            boy.velocity -= 10
-        elif event == LEFT_UP:
-            boy.velocity -= 10
-        elif event == LEFT_DOWN:
-            boy.velocity += 10
         boy.dir = boy.velocity
-        boy.timer = 500
+        boy.timer = 100
         pass
 
     @staticmethod
@@ -126,10 +116,10 @@ class DashState:
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
         boy.timer -= 1
-        boy.x += boy.velocity
+        boy.x += boy.velocity*3
         boy.x = clamp(25, boy.x, 800 - 25)
         if boy.timer == 0:
-            boy.add_event(RunState)
+            boy.add_event(SHIFT_UP)
 
         pass
 
@@ -156,7 +146,7 @@ next_state_table = {
     DashState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                 LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
                 SHIFT_UP : RunState, SHIFT_DOWN : RunState,
-                RUN_TIMER: RunState}
+               }
 
 # fill here
 }
