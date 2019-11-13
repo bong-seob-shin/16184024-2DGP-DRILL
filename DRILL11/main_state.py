@@ -86,6 +86,9 @@ def update():
         for ball in balls:
             if collide(grass, ball):
                 ball.stop()
+        for ball in balls:
+            if collide(brick,ball):
+                ball.stop()
     # fill here for collision check
 
 

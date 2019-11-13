@@ -20,4 +20,4 @@ class Brick:
 
     # fill here
     def get_bb(self):
-        return 0, 0, 1600-1,
+        return self.x-90, self.y-20, self.x+90, self.y+20
