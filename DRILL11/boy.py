@@ -49,7 +49,7 @@ class IdleState:
     @staticmethod
     def exit(boy, event):
         if event == SPACE:
-            boy.jump()
+            boy.jump_speed = 1
         pass
 
     @staticmethod
@@ -84,7 +84,7 @@ class RunState:
     @staticmethod
     def exit(boy, event):
         if event == SPACE:
-            boy.jump()
+            boy.jump_speed = 1
 
     @staticmethod
     def do(boy):
@@ -146,9 +146,10 @@ class Boy:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
-        self.max_jump_high = 400
+        self.max_jump_high = 300
         self.jump_speed = 0
-        self.gravity = 9.8
+        self.start_y = self.y-1
+
     def get_bb(self):
         return self.x - 50, self.y -50, self.x + 50, self.y +50
 
@@ -164,6 +165,12 @@ class Boy:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
+        self.y += self.jump_speed
+        if self.y>self.max_jump_high:
+            self.jump_speed = -1
+        if self.y == self.start_y:
+            self.jump_speed = 0
+            self.y += 1
 
     def draw(self):
         self.cur_state.draw(self)
@@ -176,5 +183,5 @@ class Boy:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
 
-    def jump(self):
+
         pass
