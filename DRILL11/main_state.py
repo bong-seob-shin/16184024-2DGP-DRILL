@@ -9,6 +9,7 @@ import game_world
 from boy import Boy
 from grass import Grass
 from ball import Ball, BigBall
+from brick import Brick
 
 name = "MainState"
 
@@ -46,6 +47,9 @@ def enter():
     game_world.add_objects(balls, 1)
     # fill here for balls
 
+    global brick
+    brick = Brick()
+    game_world.add_object(brick, 1)
 
 
 
