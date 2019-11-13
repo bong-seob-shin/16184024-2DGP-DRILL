@@ -96,9 +96,11 @@ def update():
             boy.stop()
             boy.y = brick.y+50
             boy.x -= brick.move_speed * game_framework.frame_time
+            boy.is_collide =True
     if boy.is_collide == True:
         if not collide(boy, brick):
             boy.jump_speed = -1
+            boy.is_collide = False
     # fill here for collision check
 
 
