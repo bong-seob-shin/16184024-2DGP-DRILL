@@ -149,9 +149,9 @@ class Boy:
         self.max_jump_high = 300
         self.jump_speed = 0
         self.start_y = self.y-1
-
+        self.is_collide = False
     def get_bb(self):
-        return self.x - 50, self.y -50, self.x + 50, self.y +50
+        return self.x - 20, self.y -50, self.x + 20, self.y +50
 
 
 
@@ -183,5 +183,6 @@ class Boy:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
 
-
+    def stop(self):
+        self.jump_speed = 0
         pass

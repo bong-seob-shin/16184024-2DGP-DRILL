@@ -77,20 +77,28 @@ def handle_events():
 
 
 def update():
+    global boy
     for game_object in game_world.all_objects():
         game_object.update()
     for ball in balls:
-       if collide(boy, ball):
-         balls.remove(ball)
-         game_world.remove_object(ball)
+        if collide(boy, ball):
+            balls.remove(ball)
+            game_world.remove_object(ball)
     for ball in balls:
         if collide(grass, ball):
             ball.stop()
     for ball in balls:
-            if collide(brick,ball):
-                ball.stop()
-                ball.x -= brick.move_speed * game_framework.frame_time
-
+        if collide(brick,ball):
+            ball.stop()
+            ball.x -= brick.move_speed * game_framework.frame_time
+    if boy.is_collide == False:
+        if collide(boy, brick):
+            boy.stop()
+            boy.y = brick.y+50
+            boy.x -= brick.move_speed * game_framework.frame_time
+    if boy.is_collide == True:
+        if not collide(boy, brick):
+            boy.jump_speed = -1
     # fill here for collision check
 
 
