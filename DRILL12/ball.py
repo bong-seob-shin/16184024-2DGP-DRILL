@@ -24,5 +24,21 @@ class Ball:
     def update(self):
      pass
 
+class BigBall(Ball):
+    MIN_FALL_SPEED = 50
+    MAX_FALL_SPEED = 200
+    image = None
+
+    def __init__(self):
+        if BigBall.image == None:
+            BigBall.image = load_image('ball41x41.png')
+        self.x, self.y = random.randint(50, 1200), random.randint(50, 950)
+
+
+
+    def get_bb(self):
+        return self.x - 20, self.y -20, self.x +20, self.y +20
+
+
 
 
