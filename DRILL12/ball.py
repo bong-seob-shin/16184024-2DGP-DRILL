@@ -9,7 +9,8 @@ class Ball:
     def __init__(self):
         if Ball.image == None:
             Ball.image = load_image('ball21x21.png')
-        self.x, self.y = random.randint(50, 1200), random.randint(50, 950)
+        self.x, self.y = random.randint(150, 1000), random.randint(150, 850)
+        self.hp = 50
 
     def get_bb(self):
         # fill here
@@ -32,8 +33,8 @@ class BigBall(Ball):
     def __init__(self):
         if BigBall.image == None:
             BigBall.image = load_image('ball41x41.png')
-        self.x, self.y = random.randint(50, 1200), random.randint(50, 950)
-
+        self.x, self.y = random.randint(150, 1000), random.randint(150, 850)
+        self.hp = 100
 
 
     def get_bb(self):
