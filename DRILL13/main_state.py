@@ -59,6 +59,7 @@ def handle_events():
 
 def update():
     global  boy
+    times = []
     for game_object in game_world.all_objects():
         game_object.update()
 
@@ -67,6 +68,9 @@ def update():
             zombie = game_object
             if collide(zombie, boy):
                 time = get_time() - boy.start_time
+                times.append(time)
+                with open('rank.json', 'w') as f:
+                    json.dump(times, f)
                 game_framework.change_state(ranking_state)
 
 

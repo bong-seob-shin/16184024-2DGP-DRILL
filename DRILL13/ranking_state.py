@@ -21,10 +21,14 @@ name = "RankingState"
 menu = None
 
 def enter():
-    global menu
-    menu = load_image('menu.png')
+    global font
+    global times
     hide_cursor()
     hide_lattice()
+    font = load_font('ENCR10B.TTF', 50)
+    with open('rank.json', 'r') as f:
+        times = json.load(f)
+
 
 def exit():
     global menu
@@ -54,7 +58,12 @@ def update():
 
 def draw():
     clear_canvas()
+    x=get_canvas_width()//2
+    y=get_canvas_height()//2
+    for time in times:
 
+        font.draw(x, y, '(Time: %3.2f)' % (time), (255, 255, 0))
+        y -= 20
     update_canvas()
 
 
