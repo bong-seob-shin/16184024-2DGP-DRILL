@@ -6,9 +6,10 @@ import os
 from pico2d import *
 import game_framework
 import game_world
-
+import ranking_state
 import world_build_state
-
+from zombie import Zombie
+from boy import  Boy
 name = "MainState"
 
 
@@ -57,8 +58,16 @@ def handle_events():
 
 
 def update():
+    global  boy
     for game_object in game_world.all_objects():
         game_object.update()
+
+    for game_object in game_world.all_objects():
+        if isinstance(game_object, Zombie):
+            zombie = game_object
+            if collide(zombie, boy):
+                time = get_time() - boy.start_time
+                game_framework.change_state(ranking_state)
 
 
 def draw():
