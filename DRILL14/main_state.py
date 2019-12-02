@@ -81,7 +81,7 @@ def handle_events():
 
 
 def update():
-    global boy
+    global boy,balls
     for game_object in game_world.all_objects():
         game_object.update()
 
